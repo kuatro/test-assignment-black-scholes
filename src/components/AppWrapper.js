@@ -7,7 +7,7 @@ const AppWrapper = styled.div`
   align-items: flex-start;
   justify-content: center;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 840px) {
     flex-direction: row;
   }
 `;

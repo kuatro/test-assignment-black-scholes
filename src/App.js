@@ -40,14 +40,16 @@ const App = () => (
       <Column>
         <Caption as='h2' size='l'>Results</Caption>
         <table>
-          <ResultsLegend />
-          <Result name='price' call={0.001021} put={4.755456} />
-          <Result name='Δ (delta)' call={0.001021} put={4.755456} />
-          <Result name='Γ (gamma)' call={0.001021} put={4.755456} />
-          <Result name='ρ (rho)' call={0.001021} put={4.755456} />
-          <Result name='Θ (theta)' call={0.001021} put={4.755456} />
-          <Result name='d1' call={0.001021} put={4.755456} />
-          <Result name='d2' call={0.001021} put={4.755456} />
+          <tbody>
+            <ResultsLegend />
+            <Result name='price' call={0.001021} put={4.755456} />
+            <Result name='Δ (delta)' call={0.001021} put={4.755456} />
+            <Result name='Γ (gamma)' call={0.001021} put={4.755456} />
+            <Result name='ρ (rho)' call={0.001021} put={4.755456} />
+            <Result name='Θ (theta)' call={0.001021} put={4.755456} />
+            <Result name='d1' call={0.001021} put={4.755456} />
+            <Result name='d2' call={0.001021} put={4.755456} />
+          </tbody>
         </table>
       </Column>
     </AppWrapper>
