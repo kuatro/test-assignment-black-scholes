@@ -12,6 +12,7 @@ const Input = styled.input`
   font-family: ${props => props.theme.fonts.primary};
   font-size: 20px;
   color: ${props => props.theme.colors.primary};
+  text-align: right;
 
   &:focus {
     outline: none;
