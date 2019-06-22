@@ -5,7 +5,8 @@ const theme = {
   },
   colors: {
     primary: '#000000',
-    secondary: '#BFBAB6'
+    secondary: '#BFBAB6',
+    important: '#FF6620',
   },
   shadows: {
     inputDefault: '0px 0px 12px #F2F0ED, 0px 1px 3px #E6E3E1',
