@@ -8,6 +8,6 @@ const StyledForm = styled.form`
 
 const Form = props => (
   <StyledForm {...props} />
-)
+);
 
 export default Form;

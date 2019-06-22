@@ -1,6 +1,7 @@
+import React from 'react';
 import styled from '@emotion/styled';
 
-const Input = styled.input`
+const StyledInput = styled.input`
   box-sizing: border-box;
   width: 100%;
   height: 60px;
@@ -22,5 +23,9 @@ const Input = styled.input`
     color: ${props => props.theme.colors.secondary};
   }
 `;
+
+const Input = ({ onChange, ...props }) => (
+  <StyledInput {...props} onChange={e => onChange(e)} />
+);
 
 export default Input;

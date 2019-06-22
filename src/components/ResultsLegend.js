@@ -12,6 +12,6 @@ const ResultsLegend = () => (
     <td><LegendCaption size='s'>Call</LegendCaption></td>
     <td><LegendCaption size='s'>Put</LegendCaption></td>
   </tr>
-)
+);
 
 export default ResultsLegend;
