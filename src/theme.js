@@ -8,6 +8,7 @@ const theme = {
     secondary: '#BFBAB6',
     lightGray: '#FAF9F7',
     important: '#FF6620',
+    alert: '#ff001e'
   },
   shadows: {
     inputDefault: '0px 0px 12px #F2F0ED, 0px 1px 3px #E6E3E1',

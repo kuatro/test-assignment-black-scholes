@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider } from 'emotion-theming';
 import theme from './theme';
 import 'normalize.css';
-
+import { Formik } from 'formik';
 import AppWrapper from './components/AppWrapper';
 import Column from './components/Column';
 import Caption from './components/Caption';
@@ -12,23 +12,31 @@ import Input from './components/Input';
 import Button from './components/Button';
 import ResultsLegend from './components/ResultsLegend';
 import Result from './components/Result';
-
 import calculate from './calculate';
 
-const onSubmit = (e, fields, setResults) => {
-  e.preventDefault();
-  setResults(calculate(fields));
+const initialState = {
+  spot: 25.00,
+  strike: 30.00,
+  time: 60.00,
+  rf: 5.00,
+  sigma: 15.00
+};
+
+const validate = fields => {
+  let errors = {};
+
+  for (const field in fields) {
+    if (typeof fields[field] !== 'number' || fields[field] < 0) {
+      errors[field] = 'Positive numbers only';
+    }
+  }
+
+  if (Object.keys(errors).length) {
+    return errors;
+  }
 };
 
 const App = () => {
-  const [fields, setFields] = useState({
-    spot: 0,
-    strike: 0,
-    time: 0,
-    rf: 0,
-    sigma: 0
-  });
-
   const [results, setResults] = useState({
     priceC: 0,
     priceP: 0,
@@ -44,37 +52,76 @@ const App = () => {
     d2: 0
   });
 
-  useEffect(() => {
-    console.log(fields)
-  });
-
-  const onChange = e => {
-    setFields({ ...fields, [e.target.name]: parseFloat(e.target.value) });
-  };
-
   return (
     <ThemeProvider theme={theme}>
       <AppWrapper>
         <Column id='input'>
           <Caption as='h2' size='l'>Data</Caption>
-          <Form onSubmit={e => onSubmit(e, fields, setResults)}>
-            <Label htmlFor='spotPrice'>Spot price</Label>
-            <Input id='spot' type='number' name='spot' onChange={onChange} />
+          <Formik
+            initialValues={initialState}
+            validate={fields => validate(fields)}
+            onSubmit={(values, { setSubmitting }) => {
+              setResults(calculate(values));
+              setSubmitting(false);
+            }}
+          >
+            {({
+              values,
+              errors,
+              handleChange,
+              handleBlur,
+              handleSubmit,
+              isSubmitting
+            }) => (
+              <Form onSubmit={handleSubmit}>
+                <Label htmlFor='spotPrice'>Spot price</Label>
+                <Input
+                  id='spot'
+                  type='number'
+                  name='spot'
+                  error={errors.spot}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.spot}
+                />
 
-            <Label htmlFor='strikePrice'>Strike price</Label>
-            <Input id='strike' type='number' name='strike' onChange={onChange} />
+                <Label htmlFor='strikePrice'>Strike price</Label>
+                <Input
+                  id='strike'
+                  type='number'
+                  name='strike'
+                  error={errors.strike}
+                  onChange={handleChange}
+                  value={values.strike}
+                />
 
-            <Label htmlFor='time'>Time to maturity</Label>
-            <Input id='time' type='number' name='time' onChange={onChange} />
+                <Label htmlFor='time'>Time to maturity</Label>
+                <Input
+                  id='time'
+                  type='number'
+                  name='time'
+                  error={errors.time}
+                  onChange={handleChange}
+                  value={values.time}
+                />
 
-            <Label htmlFor='rf'>Risk-free interest rate %</Label>
-            <Input id='rf' type='number' name='rf' onChange={onChange} />
+                <Label htmlFor='rf'>Risk-free interest rate %</Label>
+                <Input
+                  id='rf'
+                  type='number'
+                  name='rf'
+                  error={errors.rf}
+                  onChange={handleChange}
+                  value={values.rf}
+                />
 
-            <Label htmlFor='sigma'>Volatility %</Label>
-            <Input id='sigma' type='number' name='sigma' onChange={onChange} />
+                <Label htmlFor='sigma'>Volatility %</Label>
+                <Input id='sigma' type='number' name='sigma' onChange={handleChange} value={values.sigma} />
 
-            <Button type='submit'>Submit</Button>
-          </Form>
+                <Button type='submit' disabled={isSubmitting}>Submit</Button>
+              </Form>
+            )}
+          </Formik>
         </Column>
         <Column id='output'>
           <Caption as='h2' size='l'>Results</Caption>
