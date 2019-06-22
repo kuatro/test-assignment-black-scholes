@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import copy from 'copy-to-clipboard';
 import Caption from './Caption';
 
 const ResultWrapper = styled.tr`
@@ -11,8 +12,11 @@ const ResultWrapper = styled.tr`
   }
 `;
 
-const DigitalCaption = styled(Caption)`
+const DigitalCaption = styled(Caption.withComponent('button'))`
+  border: none;
+  background: none;
   text-align: right;
+  cursor: pointer;
 `;
 
 const Result = ({ name, call, put }) => (
@@ -21,10 +25,10 @@ const Result = ({ name, call, put }) => (
       <Caption size='l'>{name}</Caption>
     </td>
     <td>
-      <DigitalCaption size='l'>{call}</DigitalCaption>
+      <DigitalCaption size='l' onClick={() => copy(call)}>{call}</DigitalCaption>
     </td>
     <td>
-      <DigitalCaption size='l'>{put}</DigitalCaption>
+      <DigitalCaption size='l' onClick={() => copy(put)}>{put}</DigitalCaption>
     </td>
   </ResultWrapper>
 );

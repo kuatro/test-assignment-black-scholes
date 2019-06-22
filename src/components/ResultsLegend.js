@@ -8,7 +8,7 @@ const LegendCaption = styled(Caption)`
 
 const ResultsLegend = () => (
   <tr>
-    <td></td>
+    <td><LegendCaption size='s'>(click or tap to copy)</LegendCaption></td>
     <td><LegendCaption size='s'>Call</LegendCaption></td>
     <td><LegendCaption size='s'>Put</LegendCaption></td>
   </tr>
