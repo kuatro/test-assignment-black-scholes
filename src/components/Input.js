@@ -4,7 +4,7 @@ const Input = styled.input`
   box-sizing: border-box;
   width: 100%;
   height: 60px;
-  padding: 0 30px;
+  padding: 0 10px;
   margin: 6px 0 24px 0;
   border: none;
   box-shadow: ${props => props.theme.shadows.inputDefault};
