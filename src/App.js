@@ -61,8 +61,10 @@ const App = () => {
             initialValues={initialState}
             validate={fields => validate(fields)}
             onSubmit={(values, { setSubmitting }) => {
+              window.location.hash = '';
               setResults(calculate(values));
               setSubmitting(false);
+              window.location.hash = '#output';
             }}
           >
             {({
